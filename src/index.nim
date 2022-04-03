@@ -18,3 +18,4 @@ for rte in rtes:
     if rte.taskKey.len > 0:
         echo "save work log for task ", rte.taskKey
         jiraService.createWorkLog(rte.taskKey, rte.durationMinutes, rte.startTime, rte.taskComment)
+echo "Done"

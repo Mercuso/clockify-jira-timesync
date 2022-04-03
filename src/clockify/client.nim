@@ -20,9 +20,6 @@ proc getTasksReports* (clockifyClient: ClockifyClient, dateStart: DateTime, date
   let dateStartStr = dateStart.format(constants.CLOCKIFY_DATE_STR_FORMAT)
   let dateEndStr = dateEnd.format(constants.CLOCKIFY_DATE_STR_FORMAT)
 
-  echo "start time:" & dateStartStr
-  echo "end time:" & dateEndStr
-
   let body = %*{
       "dateRangeStart": dateStartStr,
       "dateRangeEnd": dateEndStr,
@@ -63,7 +60,6 @@ proc getDetailedTaskReports* (clockifyClient: ClockifyClient, dateStart: DateTim
       httpMethod = HttpPost,
       body = $body # $ - to convert body to string
     )
-    echo response.body
     let clockifyReportsJSON = parseJson(response.body)
     let timeEntries = clockifyReportsJSON["timeentries"]
     result = timeEntries.elems
