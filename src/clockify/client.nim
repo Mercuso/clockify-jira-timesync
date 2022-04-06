@@ -60,6 +60,26 @@ proc getDetailedTaskReports* (clockifyClient: ClockifyClient, dateStart: DateTim
       httpMethod = HttpPost,
       body = $body # $ - to convert body to string
     )
+    if response.code.is4xx:
+      var code: int
+      var message: string
+      if response.headers["content-type"] == "application/json":
+        let errorResponse = parseJson(response.body)
+        code = errorResponse["code"].getInt()
+        message = errorResponse["message"].getStr()
+      else:
+        code = int(response.code)
+        message = response.body
+      let errMsg = fmt"""
+Cannot get detailed report from Clockify
+Error code: {code}
+Error message: {message}
+"""
+      raise newException(HttpRequestError, errMsg)
+    elif response.code.is5xx:
+      let errMsg = "Reuqest to Clockify API failed with unexpected error"
+      raise newException(HttpRequestError, errMsg)
+      
     let clockifyReportsJSON = parseJson(response.body)
     let timeEntries = clockifyReportsJSON["timeentries"]
     result = timeEntries.elems
