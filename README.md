@@ -1,4 +1,13 @@
-## Usage
+# CJ-timesync
+CLI tool for moving the daily worklogs from Clockify to Jira
+
+## Requirements for Clockify worklogs format
+Format for Clockify task description:  
+`[DEV-<jira task number>] <task comment>`  
+Example:  
+`[DEV-420] smoke testing`  
+
+## Build and configuration
 Build the binary from the source code:
 ```bash
 nim c -d:ssl --out:./bin/syncTimeEntries ./src/index.nim
@@ -14,6 +23,7 @@ Collect all the required values for environment variables:
 
 Set these values as an anvironment variables    
 
+## Usage
 Run the command with target date as an argument:
 ```bash
 ./bin/syncTimeEntries 2022-04-03
