@@ -16,8 +16,10 @@ try:
     let jiraService = newJiraService()
     for rte in rtes:
         if rte.taskKey.len > 0:
-            echo "save work log for task ", rte.taskKey
+            echo "save work log ", rte.description
             jiraService.createWorkLog(rte.taskKey, rte.durationMinutes, rte.startTime, rte.taskComment)
+        else:
+            echo "skipping time entry ", rte.description
     echo "Done"
 except HttpRequestError:
     quit(getCurrentExceptionMsg())

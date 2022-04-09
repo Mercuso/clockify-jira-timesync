@@ -7,7 +7,7 @@ import ./client
 
 
 type ReportTimeEntry* = ref object
-    description: string
+    description*: string
     startTimeStr: string
     duration*: int  # - spent time in seconds
 

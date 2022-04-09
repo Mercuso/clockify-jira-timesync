@@ -79,7 +79,7 @@ Error message: {message}
     elif response.code.is5xx:
       let errMsg = "Reuqest to Clockify API failed with unexpected error"
       raise newException(HttpRequestError, errMsg)
-      
+
     let clockifyReportsJSON = parseJson(response.body)
     let timeEntries = clockifyReportsJSON["timeentries"]
     result = timeEntries.elems
