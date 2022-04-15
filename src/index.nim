@@ -9,7 +9,12 @@ import ./easterEggs/wednesday/services
 try:
     let clocifyService = newClockifyService()
     let cmdParams = commandLineParams()
-    let dateStart = times.parse(cmdParams[0], "yyyy-MM-dd")
+    var dateStart: DateTime
+    if cmdParams.len > 0:
+        dateStart = times.parse(cmdParams[0], "yyyy-MM-dd")
+    else:
+        let nowDT = now()
+        dateStart = dateTime(nowDT.year, nowDT.month, nowDT.monthday)
     let dateEnd = dateStart + 1.days
     echo "sync time entries created from ", dateStart.format("yyyy-MM-dd'T'HH:mm:sszzz"), " to ", dateEnd.format("yyyy-MM-dd'T'HH:mm:sszzz")
     if isItWednesday(now()+1.days):

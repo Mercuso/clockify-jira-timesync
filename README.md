@@ -10,7 +10,7 @@ Example:
 ## Build and configuration
 Build the binary from the source code:
 ```bash
-nim c -d:ssl --out:./bin/syncTimeEntries ./src/index.nim
+nim build
 ```
 
 Collect all the required values for environment variables:  
@@ -28,3 +28,4 @@ Run the command with target date as an argument:
 ```bash
 ./bin/syncTimeEntries 2022-04-03
 ```
+if argument is not provided, the current day will be used by default
