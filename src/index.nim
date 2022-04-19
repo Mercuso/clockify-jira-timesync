@@ -17,7 +17,7 @@ try:
         dateStart = dateTime(nowDT.year, nowDT.month, nowDT.monthday)
     let dateEnd = dateStart + 1.days
     echo "sync time entries created from ", dateStart.format("yyyy-MM-dd'T'HH:mm:sszzz"), " to ", dateEnd.format("yyyy-MM-dd'T'HH:mm:sszzz")
-    if isItWednesday(now()+1.days):
+    if isItWednesday(now()):
         printWednesdayGreeting()
     let rtes = clocifyService.getReportTimeEntries(dateStart, dateEnd)
     let jiraService = newJiraService()
